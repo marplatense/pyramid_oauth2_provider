@@ -29,7 +29,7 @@ def oauth2_settings(key=None, default=None):
         else:
             return value
     else:
-        return dict((x.split('.', 1)[1], y) for x, y in settings.iteritems()
+        return dict((x.split('.', 1)[1], y) for x, y in settings.items()
             if x.startswith('oauth2_provider.'))
 
 def getClientCredentials(request):
