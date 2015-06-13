@@ -55,7 +55,7 @@ def getClientCredentials(request):
     token = base64.b64decode(parts[1])
 
     if token_type == 'basic':
-        client_id, client_secret = token.split(':')
+        client_id, client_secret = token.decode('ascii').split(':')
         request.client_id = client_id
         request.client_secret = client_secret
 

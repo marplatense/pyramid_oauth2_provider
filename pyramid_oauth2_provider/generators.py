@@ -16,8 +16,8 @@ import hashlib
 
 def _get_hash():
     sha = hashlib.sha256()
-    sha.update(str(random.random()))
-    sha.update(str(time.time()))
+    sha.update(str(random.random()).encode('utf-8'))
+    sha.update(str(time.time()).encode('utf-8'))
     return sha
 
 def gen_client_id():
@@ -28,5 +28,5 @@ def gen_client_secret():
 
 def gen_token(client):
     sha = _get_hash()
-    sha.update(client.client_id)
+    sha.update(client.client_id.encode('utf-8'))
     return sha.hexdigest()
