@@ -15,6 +15,7 @@ import sys
 
 import transaction
 
+from pyramid_sqlalchemy import Session as DBSession, BaseObject as Base
 from sqlalchemy import engine_from_config
 
 from pyramid.paster import (
@@ -23,7 +24,6 @@ from pyramid.paster import (
     )
 
 from pyramid_oauth2_provider.models import (
-    DBSession,
     initialize_sql,
     Oauth2Client,
     )
@@ -47,7 +47,9 @@ def main(argv=sys.argv):
     setup_logging(config_uri)
     settings = get_appsettings(config_uri, section)
     engine = engine_from_config(settings, 'sqlalchemy.')
-    initialize_sql(engine, settings)
+    DBSession.configure(bind=engine)
+    Base.metadata.bind = engine
+    Base.metadata.create_all(engine)
 
     with transaction.manager:
         id, secret = create_client()

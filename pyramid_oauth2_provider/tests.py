@@ -16,6 +16,7 @@ import transaction
 from urllib.parse import urlparse
 from urllib.parse import parse_qsl
 
+from pyramid_sqlalchemy import Session as DBSession
 from sqlalchemy import create_engine
 
 from zope.interface import implementer
@@ -26,7 +27,6 @@ from pyramid.response import Response
 from . import jsonerrors
 from .views import oauth2_token
 from .views import oauth2_authorize
-from .models import DBSession
 from .models import Oauth2Token
 from .models import Oauth2Client
 from .models import Oauth2Code

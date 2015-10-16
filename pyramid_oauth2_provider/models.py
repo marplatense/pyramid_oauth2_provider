@@ -13,6 +13,7 @@
 import time
 from datetime import datetime
 
+from pyramid_sqlalchemy import Session as DBSession, BaseObject as Base
 from sqlalchemy import Column
 from sqlalchemy import ForeignKey
 
@@ -20,22 +21,12 @@ from sqlalchemy import String
 from sqlalchemy import Integer
 from sqlalchemy import Boolean
 from sqlalchemy import DateTime
-
-from sqlalchemy.ext.declarative import declarative_base
-
 from sqlalchemy.orm import backref
 from sqlalchemy.orm import relationship
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm import scoped_session
-
-from zope.sqlalchemy import ZopeTransactionExtension
 
 from .generators import gen_token
 from .generators import gen_client_id
 from .generators import gen_client_secret
-
-DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
-Base = declarative_base()
 
 
 class Oauth2Client(Base):

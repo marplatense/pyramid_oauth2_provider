@@ -10,13 +10,11 @@
 # or fitness for a particular purpose. See the MIT License for full details.
 #
 
-from sqlalchemy import engine_from_config
 
 from pyramid.config import Configurator
 from pyramid.exceptions import ConfigurationError
 from pyramid.interfaces import IAuthenticationPolicy
 
-from .models import initialize_sql
 from .interfaces import IAuthCheck
 from .authentication import OauthAuthenticationPolicy
 
@@ -25,9 +23,6 @@ from . import tests
 
 def includeme(config):
     settings = config.registry.settings
-    engine = engine_from_config(settings, 'sqlalchemy.')
-
-    initialize_sql(engine, settings)
 
     if not config.registry.queryUtility(IAuthenticationPolicy):
         config.set_authentication_policy(OauthAuthenticationPolicy())

@@ -22,7 +22,7 @@ from urllib.parse import parse_qsl
 from urllib.parse import ParseResult
 from urllib.parse import urlencode
 
-from .models import DBSession as db
+from pyramid_sqlalchemy import Session as db
 from .models import Oauth2Token
 from .models import Oauth2Code
 from .models import Oauth2RedirectUri
