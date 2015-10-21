@@ -81,7 +81,7 @@ class TestCase(unittest.TestCase):
 
     def getAuthHeader(self, username, password, scheme='Basic'):
         return {'Authorization': '%s %s'
-            % (scheme, base64.b64encode('%s:%s' % (username, password)))}
+            % (scheme, base64.b64encode('{}:{}'.format(username, password).encode('ascii')).decode('utf-8'))}
 
 class TestAuthorizeEndpoint(TestCase):
     def setUp(self):
